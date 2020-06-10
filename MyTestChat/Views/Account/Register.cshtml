@@ -1,0 +1,85 @@
+﻿
+@model MyTestChat.ViewModels.RegisterViewModel
+<!DOCTYPE html>
+<head>
+    <title>Register to StreeT SN</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="~/css/forma.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/templatemo_misc.css">
+    <link href="/css/templatemo_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+</head>
+<body style="background:#393e42; color:aliceblue;">
+    <div class="site-header">
+        <div class="main-navigation">
+
+            <div class="container">
+                <div class="row templatemo_gallerygap" style="margin-bottom: 5%;">
+
+                    <div class="row col-md-3 col-sm-12">
+                        <a href="http://user10565.realhost-free.net/"><img src="/images/templatemo_logo.jpg" alt="Polygon HTML5 Template"></a>
+                        <label style="color:aliceblue">Спасибо, что вы с нами</label>
+                    </div>
+
+                </div> <!-- /.col-md-12 -->
+
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.main-navigation -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+
+                <div class="tab" role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#Section1" aria-controls="home" onclick="location.replace('../Account/Login')" role="tab" data-toggle="tab">Вход</a></li>
+                        <li role="presentation" class="active"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">Регистрация</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabs">
+
+                        <div role="tabpanel" class="tab-pane fade in active" id="Section2">
+                            <form class="form-horizontal" method="post" asp-controller="Account" asp-action="Register">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" asp-for="Email"></label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Login" for="exampleInputLogin"></label>
+                                    <input  class="form-control" asp-for="Login" id="exampleInputLogin">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" for="exampleInputPassword1"></label>
+                                    <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1">
+                                    <span style="color: aliceblue;"  asp-validation-for="Password"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PasswordConfirm" for="exampleInputPassword1"></label>
+                                    <input asp-for="PasswordConfirm" type="password" class="form-control" id="exampleInputPassword1">
+                                    <span style="color: aliceblue;"  asp-validation-for="PasswordConfirm"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.col-md-offset-3 col-md-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+    </body>

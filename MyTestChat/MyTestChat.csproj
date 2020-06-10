@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\bx_loader.gif" />
+    <None Include="wwwroot\images\close.png" />
+    <None Include="wwwroot\images\gallery\1.jpg" />
+    <None Include="wwwroot\images\gallery\10.jpg" />
+    <None Include="wwwroot\images\gallery\11.jpg" />
+    <None Include="wwwroot\images\gallery\12.jpg" />
+    <None Include="wwwroot\images\gallery\13.jpg" />
+    <None Include="wwwroot\images\gallery\14.jpg" />
+    <None Include="wwwroot\images\gallery\15.jpg" />
+    <None Include="wwwroot\images\gallery\16.jpg" />
+    <None Include="wwwroot\images\gallery\17.jpg" />
+    <None Include="wwwroot\images\gallery\18.jpg" />
+    <None Include="wwwroot\images\gallery\2.jpg" />
+    <None Include="wwwroot\images\gallery\3.jpg" />
+    <None Include="wwwroot\images\gallery\4.jpg" />
+    <None Include="wwwroot\images\gallery\5.jpg" />
+    <None Include="wwwroot\images\gallery\6.jpg" />
+    <None Include="wwwroot\images\gallery\7.jpg" />
+    <None Include="wwwroot\images\gallery\8.jpg" />
+    <None Include="wwwroot\images\gallery\9.jpg" />
+    <None Include="wwwroot\images\loading.gif" />
+    <None Include="wwwroot\images\next.png" />
+    <None Include="wwwroot\images\previous.png" />
+    <None Include="wwwroot\images\team\1.jpg" />
+    <None Include="wwwroot\images\team\2.jpg" />
+    <None Include="wwwroot\images\team\3.jpg" />
+    <None Include="wwwroot\images\team\4.jpg" />
+    <None Include="wwwroot\images\templatemo_contactiframe.png" />
+    <None Include="wwwroot\images\templatemo_footerhexa.png" />
+    <None Include="wwwroot\images\templatemo_logo.jpg" />
+    <None Include="wwwroot\images\templatemo_teamhexa.png" />
+    <None Include="wwwroot\images\templatemo_teamhexa_hover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>

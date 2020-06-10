@@ -1,0 +1,668 @@
+﻿
+<!DOCTYPE html>
+@model MyTestChat.ViewModels.CommonViewModel
+<head>
+    <title>StreeT</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="~/css/forma.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/templatemo_misc.css">
+    <link href="/css/templatemo_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+    <script src="~/js/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <script src="/js/bootstrap-multiselect.js"></script>
+    <script src="/js/bootstrap-multiselect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-lightbox/0.7.0/bootstrap-lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-JavaScript-Templates/3.17.0/js/tmpl.min.js"></script>
+    <script src="~/js/templatemo_custom.js"></script>
+
+    <script>
+        function showhide() {
+            var div = document.getElementById("newpost");
+            if (div.style.display != "none") {
+                div.style.display = "none";
+            }
+            else {
+                div.style.display = "block";
+            }
+        }
+    </script>
+
+</head>
+@if (User.Identity.IsAuthenticated)
+{
+<body>
+    <div class="site-header">
+        <div class="main-navigation">
+            <div class="responsive_menu collapse">
+                <ul>
+                    <li><a class="show-1 templatemo_home" href="#">Моя страница</a></li>
+                    <li><a class="show-2 templatemo_page2" href="#">Пользователи</a></li>
+                    <li><a class="show-3 templatemo_page3" href="#">Диалоги</a></li>
+                    <li><a class="show-5 templatemo_page5" href="#">Друзья.подписчики</a></li>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="row templatemo_gallerygap">
+                    <div class="col-md-12 responsive-menu">
+                        <a href="#" class="menu-toggle-btn">
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                    </div> <!-- /.col-md-12 -->
+                    <div  class="container">
+                        <div style="height:57%" class="container size">
+
+                            <div style="margin-top:7%" class="col-md-3 col-sm-4">
+                                <div style="margin-left: 12%;" class="hexagon hexagonteam gallery-item">
+                                    <div class="hexagon-in1">
+                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 main_menu">
+                                <ul>
+
+                                    <li>
+                                        <a class="show-1 templatemo_home" href="#">
+                                            <span class="fa fa-camera"></span>
+                                            Моя страница
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="show-2 templatemo_page2">
+                                            <span class="fa fa-users"></span>
+                                            Пользователи
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="show-3 templatemo_page3" href="#">
+                                            <span class="fa fa-envelope"></span>
+                                            Диалоги
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="show-5 templatemo_page5" href="#">
+                                            <span class="fa fa-handshake"></span>
+                                            Друзья
+                                            <label class="label label-info" id="y"></label>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+
+                                <div style="margin-left: -1%;font-size: 165%;margin-top: 12%;" class="col-sm col-md-4">
+
+                                    <p id="us1">@User.Identity.Name</p>
+
+                                    <form method="post" asp-controller="Account" asp-action="Logout">
+                                        <input type="submit" value="Выход" />
+                                    </form>
+
+                                </div>
+                                <div style="margin-top: 8%;" class="d-flex flex-column col-sm">
+                                    <h2>Cтатус</h2>
+
+                                    <p>
+                                        Но ты не бутля из-под вина.
+                                        Эта барышня малая, ска хочет в облака.
+                                        Она думает, что p*ssy правят миром,
+                                        Но ей за деньги, деньги, деньги говорят спасибо.
+                                        Убогая походка, но на каблах стильных.
+                                        Я такой простой, что не е*у таких красивых.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="menu-container">
+        <!-- gallery start -->
+
+        <div class="content team" id="menu-2">
+
+            <div class="templatemo_ourteam">
+                <div class="container templatemo_hexteam">
+                    <div class="flex-column">
+
+                        @foreach (var fr in Model.friends)
+                        {
+
+                        @if (fr.Username2 == User.Identity.Name && fr.Status == 0)
+                            {
+                        <div class="container size">
+
+                            <div class="col-md-3 col-sm-4">
+                                <div class="hexagon hexagonteam gallery-item">
+                                    <div class="hexagon-in1">
+                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                            <div class="clear"></div>
+                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                <h2></h2>
+                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username1</p>
+                                <button type="button" onclick="MyFr('@fr.id')" class="btn btn-primary">Подписаться в ответ</button>
+                            </div>
+                        </div>
+                            }
+
+
+                        <label id="y"></label>
+                        @if (fr.Username1 == User.Identity.Name && fr.Status == 1)
+                            {
+                        <div class="container size">
+
+                            <div class="col-md-3 col-sm-4">
+                                <div class="hexagon hexagonteam gallery-item">
+                                    <div class="hexagon-in1">
+                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                            <div class="clear"></div>
+                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                <h2></h2>
+                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
+                                <button type="button" class="btn btn-success">Вы друзья</button>
+                            </div>
+                        </div>
+                            }
+
+
+
+                        @if (fr.Username1 == User.Identity.Name && fr.Status == 0)
+                            {
+
+                        <div class="container size">
+
+                            <div class="col-md-3 col-sm-4">
+                                <div class="hexagon hexagonteam gallery-item">
+                                    <div class="hexagon-in1">
+                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                            <div class="clear"></div>
+                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                <h2></h2>
+                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
+                                <button type="button" class="btn btn-secondary">Вы подписчик</button>
+                            </div>
+                        </div>
+
+                            }
+
+                        }
+                        @foreach (var us in Model.users)
+                        {
+                            
+                    <div id="@us.FirstOrDefault().UserName">
+                        @foreach (var u in us)
+                        {
+
+                            if (u.UserName != User.Identity.Name)
+                            {
+                                <div class="container size">
+
+                                    <div class="col-md-3 col-sm-4">
+                                        <div class="hexagon hexagonteam gallery-item">
+                                            <div class="hexagon-in1">
+                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                                    <div class="clear"></div>
+                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                        <h2></h2>
+                                        <p id="" style="font-size: 1.5vw;">@u.UserName</p>
+                                        <button type="button" class="btn btn-primary">Добавить в друзья</button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                            </div>
+                        }
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--team end-->
+        <div class="clear"></div>
+        <!-- service start -->
+        <div class="content services" id="menu-3">
+            <div class="container">
+
+
+                <div id="inputForm" class="d-flex flex-row">
+                    <div class="container-fluid">
+                        <div class="d-flex flex-row justify-content-around">
+                            <input type="button" class="btn btn-success" id="#" value="Написать:" />
+                            <select class="form-control" id="group" onchange="myFunction()">
+                                <option value="All">Всем</option>
+                                <option value="PrivateGroup">В группу</option>
+                                @*<option value="MySelf">Себе</option>*@
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="d-flex flex-row justify-content-around">
+                            <input class="form-control" id="message" rows="7" />
+                            <input type="button" class="btn btn-success" id="sendBtn" onclick="Message()" value="Отправить" />
+                        </div>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary btn-lg center-block" id="JoinGroup" value="Войти в группу" />
+                @*<div style="display:none; width:74%;height:22vw" id="formgr" class="container-fluid bg-white d-flex flex-column justify-content-around text-dark">*@
+                @*<label>Название группы:</label>
+
+        <input class="form-control" id="NameGroup" type="text" />*@
+                @*<label>Выберите участников:</label>
+        <select class="form-control" id="groupin" multiple="multiple" >
+        </select>*@
+                @*<input type="button" class="btn btn-success" onclick="AddUser2()" id="Create" value="Отправить" /></div>
+        <select class="form-control" multiple  id="groupin">
+            <option value="PrivateGroup">В группу</option>
+        </select>*@
+
+                @foreach (var chat in Model.chatMessagess)
+                {
+
+            <div class="container bg-white rounded textsms" style="width:75%; display:none" id="@chat.FirstOrDefault().ChatName">
+                @foreach (var item in chat)
+                    {
+                        if (@item.UsName1 == User.Identity.Name ||@item.ChatName == "Всем" ||@item.ChatName == "В группу"||@item.ChatName ==User.Identity.Name && @item.UsName1 !=User.Identity.Name)
+                    {
+                        <p>@item.UsName1 : @item.Message для @item.ChatName</p>
+                    }
+
+                }
+
+            </div>
+
+                    }
+   
+            </div>
+            </div>
+
+        <div class="content contact" id="menu-5">
+            <div class="container">
+                <div class="row">
+                    <div class="flex-column a">
+                        @foreach (var fr in Model.friends)
+                        {
+
+                            @if (fr.Username2 == User.Identity.Name && fr.Status == 0)
+                            {
+                                <div class="container size">
+                                    <h2 style="text-align:center"><span class="btn btn-warning count">Запросы в друзья</span></h2>
+                                    <div class="col-md-3 col-sm-4">
+                                        <div class="hexagon hexagonteam gallery-item">
+                                            <div class="hexagon-in1">
+                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                                    <div class="clear"></div>
+                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                        <h2></h2>
+                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username1</p>
+                                        <button type="button" onclick="MyFr('@fr.id')" class="btn btn-primary">Подписаться в ответ</button>
+                                    </div>
+                                </div>
+                            }
+
+
+                            <label id="y"></label>
+                            @if (fr.Username1 == User.Identity.Name && fr.Status == 1)
+                            {
+                                <div class="container size">
+                                    <h2 style="text-align:center"><span class="label label-primary">Друзья</span></h2>
+                                    <div class="col-md-3 col-sm-4">
+                                        <div class="hexagon hexagonteam gallery-item">
+                                            <div class="hexagon-in1">
+                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                                    <div class="clear"></div>
+                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                        <h2></h2>
+                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
+                                        <button type="button" class="btn btn-success">Вы друзья</button>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                            @if (fr.Username1 == User.Identity.Name && fr.Status == 0)
+                            {
+
+                                <div class="container size">
+                                    <h2 style="text-align:center"><span class="label label-primary ">Мои запросы</span></h2>
+
+                                    <div class="col-md-3 col-sm-4">
+                                        <div class="hexagon hexagonteam gallery-item">
+                                            <div class="hexagon-in1">
+                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+
+                                                    <div class="clear"></div>
+                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                        <h2></h2>
+                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
+                                        <button type="button" class="btn btn-secondary">Вы подписчик</button>
+                                    </div>
+                                </div>
+
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact end -->
+    <!-- footer start -->
+    <!-- footer end -->
+    <script>
+        var sum = document.getElementsByClassName("count").length;
+        if (sum > 0)
+            document.getElementById('y').innerHTML = "+" + sum;
+
+        function MyFr(us2) {
+            var Friends = {
+
+                Id: document.getElementById('us1').innerText + document.getElementById(us2).innerText,
+                Username1: document.getElementById('us1').innerText,
+                Username2: document.getElementById(us2).innerText,
+
+            };
+
+            $.ajax({
+                url: '/Friends/Create/',
+                type: 'POST',
+                dataType: 'JSON',
+                data: JSON.stringify(Friends),
+                contentType: "application/json; charset=utf-8",
+                statusCode: {
+                    200: function () {
+                        alert("Добавлено!");
+                        window.location.reload();
+                    },
+                    400: function (error) {
+                        alert(error.responseText);
+                    }
+                }
+            });
+        }
+
+    </script>
+    <script>
+        function Message() {
+    var groupElement = document.getElementById("group");
+    var selecopt = groupElement.options[groupElement.selectedIndex];
+            var Dialogs =
+            {
+                UsName1: document.getElementById("us1").innerText,
+                ChatName: selecopt.text,
+                Message: document.getElementById('message').value
+            };
+            
+    $.ajax({
+    url: '/Chat/Create/',
+    type: 'POST',
+    dataType: 'JSON',
+    data: JSON.stringify(Dialogs),
+    contentType: "application/json; charset=utf-8",
+    //statusCode: {
+    //200: function () {
+    //alert("Добавлено!");
+    //window.location.reload();
+    //},
+    //400: function (error) {
+    //alert(error.responseText);
+    //}
+    //}
+    });
+    }
+
+    </script>
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .build();
+        let userName = document.getElementById("us1").innerText;
+        function myFunction() {
+            var groupElement = document.getElementById("group");
+            var selecopt = groupElement.options[groupElement.selectedIndex];
+            var groupValue = selecopt.text;
+            var current = document.getElementById(groupValue);
+            for (var i = 0; i < groupElement.options.length; i++) {
+                var temp = document.getElementById(groupElement.options[i].text);
+
+                if (temp != null)
+                    temp.style.display = "none";
+            }
+            if (current != null) {
+                current.style.display = "";
+            }
+        }
+        connection.on("ReceiveMessage", function (message, userName) {
+            let userNameElem = document.createElement("b");
+            userNameElem.appendChild(document.createTextNode(userName + ': '));
+            let elem = document.createElement("p");
+            elem.appendChild(userNameElem);
+            elem.appendChild(document.createTextNode(message));
+            var groupElement = document.getElementById("group");
+            var groupValue = groupElement.options[groupElement.selectedIndex].text;
+            for (var i = 0; i < groupElement.length; i++) {
+                if (document.getElementById(groupElement[i].value) == null) {
+                    if (groupElement[i].text == groupValue) {
+                        let chat = document.createElement('div');
+                        chat.className = 'container bg-white rounded textsms';
+                        chat.id = groupElement[i].text;
+                        //let forus = chat.appendChild(document.createElement("input"));
+                        //forus.value = groupElement[i].text;
+                        //forus.className = "btn btn-success a";
+                        //forus.style.display = "block";
+                        //forus.style.margin = "1% auto";
+                        //document.body.appendChild(forus);
+                        document.body.appendChild(chat);
+                        let firstElem = document.getElementById(chat.id).firstChild;
+                        document.getElementById(chat.id).insertBefore(elem, firstElem);
+                    }
+                }
+                else if (document.getElementById(groupElement[i].text) != null) {
+                    if (groupElement[i].text == groupValue) {
+                        let firstElem = document.getElementById(groupElement[i].text).firstChild;
+                        document.getElementById(groupElement[i].text).insertBefore(elem, firstElem);
+                    }
+                }
+            }
+        });
+
+        connection.on('NewUserConnected', function (userName, connectionid) {
+
+            AddUser(connectionid, userName);
+            //AddUser2(connectionid, userName );
+        });
+        //connection.on('NewGroupConnected', function (name,connectionid) {
+
+
+        //   AddUser2(name, connectionid);
+
+        //});
+        function AddUser(connectionid, userName) {
+            var groupElement = document.getElementById("group");
+            var option = document.createElement("option");
+            option.text = connectionid;
+            option.value = userName;
+            groupElement.add(option);
+        }
+        //  $("#JoinGroup").parent().children("#formgr").hide('normal');
+        ////cument.getElementById("Create").addEventListener("click",
+        //function AddUser2(userName, connectionid) {
+        //     //var opt = document.getElementById('groupin').getElementsByTagName('option');
+        //var name = document.getElementById('NameGroup').value;
+
+        //     //var r = [];
+        //     //var item;
+        //     //var login;
+        //     //for (var i = 0; i < opt.length; i++) {
+
+        //     //    if (opt[i].checked) {
+        //     //        item = opt[i].value;
+        //     //        login = opt[i].text;
+        //     //        r.push = ({ item, login });
+        //     //        break;
+        //     //    }
+        //var groupElement = document.getElementById("groupin");
+        //var option = document.createElement("option");
+        // option.text = connectionid;
+        // option.value = userName;
+        //groupElement.add(option);
+        //         //for (var i = 0; i < r.length; i++) {
+        //         //    if (connectionId == r[i].value)
+        //         //        connection.invoke("JoinToGroup", connectionid);
+
+        //         //}
+
+        //     //}
+        // };
+        //          function AddUser1(connectionid, userName) {
+        //            $(document).ready(function() {
+        //            $('#groupin').multiselect();
+        //});
+
+        //             var groupElement = document.getElementById("groupin");
+        //            var option = document.createElement("option");
+        //            option.text = connectionid;
+        //            option.value = userName;
+        //            groupElement.add(option);
+
+        //}
+
+        connection.on('OnDisconnected', function (connectionid) {
+
+            var groupElement = document.getElementById("group");
+            for (var i = 0; i < groupElement.length; i++) {
+                if (groupElement.options[i].value == connectionid) {
+                    groupElement.remove(i);
+                }
+            }
+            return groupElement;
+        });
+
+        document.getElementById("sendBtn").addEventListener("click", function (e) {
+            let message = document.getElementById("message").value;
+
+            var groupElement = document.getElementById("group");
+
+            let userNameElem = document.createElement("b");
+
+            userNameElem.appendChild(document.createTextNode(userName + ': '));
+
+            let elem = document.createElement("p");
+
+            elem.appendChild(userNameElem)
+
+            elem.appendChild(document.createTextNode(message));
+
+            var groupValue = groupElement.options[groupElement.selectedIndex].value;
+
+            if (groupValue == "All" || groupValue == "MySelf") {
+
+                var method = groupValue == "All" ? "Send" : "SendMessageToCaller";
+                connection.invoke(method, userName, message);
+
+            }
+            else if (groupValue == "PrivateGroup") {
+                connection.invoke("SendMessageToGroup", "PrivateGroup", message);
+
+            }
+            else {
+                connection.invoke("SendMessageToUser", groupValue, message);
+                userNameElem.appendChild(document.createTextNode(userName + ': '));
+                 let elem = document.createElement("p");
+                 elem.appendChild(userNameElem)
+                 elem.appendChild(document.createTextNode(message));
+            }
+        });
+
+        document.getElementById("JoinGroup").addEventListener("click", function (event) {
+
+            connection.invoke("JoinToGroup", "PrivateGroup")
+
+        });
+        connection.start();
+
+
+    </script>
+
+</body>
+}
