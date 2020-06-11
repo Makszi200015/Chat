@@ -153,8 +153,7 @@
                     <div class="flex-column">
 
                         @foreach (var fr in Model.friends)
-                        {
-
+                        { 
                         @if (fr.Username2 == User.Identity.Name && fr.Status == 0)
                             {
                         <div class="container size">
@@ -218,7 +217,7 @@
                                         <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
 
                                             <div class="clear"></div>
-                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -237,7 +236,7 @@
                         @foreach (var us in Model.users)
                         {
                             
-                    <div id="@us.FirstOrDefault().UserName">
+                    <div id="@us.FirstOrDefault().UserName+1">
                         @foreach (var u in us)
                         {
 
@@ -249,9 +248,7 @@
                                         <div class="hexagon hexagonteam gallery-item">
                                             <div class="hexagon-in1">
                                                 <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
                                                     <div class="clear"></div>
-                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,8 +256,8 @@
 
                                     <div class="col-md-3 col-sm-8 templatemo_servicetxt">
                                         <h2></h2>
-                                        <p id="" style="font-size: 1.5vw;">@u.UserName</p>
-                                        <button type="button" class="btn btn-primary">Добавить в друзья</button>
+                                        <p id="@u.UserName" style="font-size: 1.5vw;">@u.UserName</p>
+                                        <button type="button" onclick="MyFr('@u.UserName')" class="btn btn-primary">Добавить в друзья</button>
                                     </div>
                                 </div>
                             }
@@ -436,7 +433,7 @@
         function MyFr(us2) {
             var Friends = {
 
-                Id: document.getElementById('us1').innerText + document.getElementById(us2).innerText,
+                Id: document.getElementById('us1').innerText + document.getElementById(us2).value,
                 Username1: document.getElementById('us1').innerText,
                 Username2: document.getElementById(us2).innerText,
 

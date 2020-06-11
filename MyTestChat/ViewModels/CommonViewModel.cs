@@ -43,15 +43,26 @@ namespace MyTestChat.ViewModels
         {
 
             var list = user.Users.ToList();
-            foreach (var fr in friends)
+            if (friends.Count() != 0) 
             {
-                var nlist = list.Where(t => t.UserName != fr.Username1 && t.UserName != fr.Username2).Select(x => x.UserName).Distinct();
-
-                foreach (var us in nlist)
+                foreach (var fr in friends)
                 {
-                    users.Add(list.Where(h => h.UserName == us).ToList());
+                    var nlist = list.Where(t => t.UserName != fr.Username1 && t.UserName != fr.Username2).Select(x => x.UserName).Distinct();
+
+                    foreach (var us in nlist)
+                    {
+                        users.Add(list.Where(h => h.UserName == us).ToList());
+                    }
                 }
             }
+            else
+                foreach (var us in list)
+                {
+                    users.Add(list.Where(h => h.UserName == us.UserName).ToList());
+                }
+
+            users = users.Distinct().ToList();
+            
         }
         public IEnumerable<Friends> friends;
         public List<List<ChatDialogs>> chatMessagess;

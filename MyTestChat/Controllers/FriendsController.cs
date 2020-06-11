@@ -13,10 +13,12 @@ namespace MyTestChat.Controllers
     {
         UserManager<User> user;
         IFriend fr;
-        public FriendsController(IFriend f, UserManager<User> us)
+        ApplicationContext db;
+        public FriendsController(IFriend f, UserManager<User> us, ApplicationContext _db)
         {
             user = us;
-            fr = f; 
+            fr = f;
+            db = _db;
         }
         [HttpPost]
         public void Create([FromBody]Friends friends)
@@ -37,6 +39,12 @@ namespace MyTestChat.Controllers
                 }
                 fr.Create(friends);
             }
+        }
+        [HttpGet]
+        public void Delete() 
+        {
+            db.Friends.RemoveRange(db.Friends);
+            db.SaveChanges();
         }
         public IActionResult Create()
         {
