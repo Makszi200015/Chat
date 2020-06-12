@@ -36,7 +36,7 @@ namespace MyTestChat.Controllers
         [Authorize]
         public IActionResult MyPage()
         {
-            CommonViewModel model = new CommonViewModel(friend,chatMessage,user);
+            CommonViewModel model = new CommonViewModel(friend,chatMessage,user,user.GetUserId(User));
             return View(model);
         }
         public IActionResult Privacy()

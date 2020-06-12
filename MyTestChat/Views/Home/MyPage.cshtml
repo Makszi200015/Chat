@@ -151,124 +151,56 @@
             <div class="templatemo_ourteam">
                 <div class="container templatemo_hexteam">
                     <div class="flex-column">
-
-                        @foreach (var fr in Model.friends)
-                        { 
-                        @if (fr.Username2 == User.Identity.Name && fr.Status == 0)
-                            {
-                        <div class="container size">
-
-                            <div class="col-md-3 col-sm-4">
-                                <div class="hexagon hexagonteam gallery-item">
-                                    <div class="hexagon-in1">
-                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                            <div class="clear"></div>
-                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                <h2></h2>
-                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username1</p>
-                                <button type="button" onclick="MyFr('@fr.id')" class="btn btn-primary">Подписаться в ответ</button>
-                            </div>
-                        </div>
-                            }
-
-
-                        <label id="y"></label>
-                        @if (fr.Username1 == User.Identity.Name && fr.Status == 1)
-                            {
-                        <div class="container size">
-
-                            <div class="col-md-3 col-sm-4">
-                                <div class="hexagon hexagonteam gallery-item">
-                                    <div class="hexagon-in1">
-                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                            <div class="clear"></div>
-                                            <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                <h2></h2>
-                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
-                                <button type="button" class="btn btn-success">Вы друзья</button>
-                            </div>
-                        </div>
-                            }
-
-
-
-                        @if (fr.Username1 == User.Identity.Name && fr.Status == 0)
-                            {
-
-                        <div class="container size">
-
-                            <div class="col-md-3 col-sm-4">
-                                <div class="hexagon hexagonteam gallery-item">
-                                    <div class="hexagon-in1">
-                                        <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                            <div class="clear"></div>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                <h2></h2>
-                                <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
-                                <button type="button" class="btn btn-secondary">Вы подписчик</button>
-                            </div>
-                        </div>
-
-                            }
-
-                        }
-                        @foreach (var us in Model.users)
+                        @foreach (var us in Model.sortusers)
                         {
-                            
-                    <div id="@us.FirstOrDefault().UserName+1">
-                        @foreach (var u in us)
-                        {
+                            <div class="container size">
 
-                            if (u.UserName != User.Identity.Name)
-                            {
-                                <div class="container size">
-
-                                    <div class="col-md-3 col-sm-4">
-                                        <div class="hexagon hexagonteam gallery-item">
-                                            <div class="hexagon-in1">
-                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-                                                    <div class="clear"></div>
-                                                </div>
+                                <div class="col-md-3 col-sm-4">
+                                    <div class="hexagon hexagonteam gallery-item">
+                                        <div class="hexagon-in1">
+                                            <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+                                                <div class="clear"></div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                        <h2></h2>
-                                        <p id="@u.UserName" style="font-size: 1.5vw;">@u.UserName</p>
-                                        <button type="button" onclick="MyFr('@u.UserName')" class="btn btn-primary">Добавить в друзья</button>
-                                    </div>
                                 </div>
-                            }
-                        }
+
+                                <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                    <h2></h2>
+                                    <p id="@us.Username" style="font-size: 1.5vw;">@us.Username</p>
+                                    @switch (us.Status)
+                                    {
+                                        case 1:
+                                            {
+                                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-primary">Добавить в друзья</button>
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-info">Подписаться в ответ</button>
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-secondary">Вы подписчик</button>
+                                                break;
+                                            }
+                                        default:
+                                            {
+                                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-success">Вы друзья</button>
+                                                break;
+                                            }
+                                    }
+
+                                </div>
                             </div>
                         }
-                    
+
                     </div>
                 </div>
             </div>
         </div>
+
         <!--team end-->
         <div class="clear"></div>
         <!-- service start -->
@@ -301,121 +233,81 @@
                 @*<div style="display:none; width:74%;height:22vw" id="formgr" class="container-fluid bg-white d-flex flex-column justify-content-around text-dark">*@
                 @*<label>Название группы:</label>
 
-        <input class="form-control" id="NameGroup" type="text" />*@
+                <input class="form-control" id="NameGroup" type="text" />*@
                 @*<label>Выберите участников:</label>
-        <select class="form-control" id="groupin" multiple="multiple" >
-        </select>*@
+                <select class="form-control" id="groupin" multiple="multiple" >
+                </select>*@
                 @*<input type="button" class="btn btn-success" onclick="AddUser2()" id="Create" value="Отправить" /></div>
-        <select class="form-control" multiple  id="groupin">
-            <option value="PrivateGroup">В группу</option>
-        </select>*@
+                <select class="form-control" multiple  id="groupin">
+                    <option value="PrivateGroup">В группу</option>
+                </select>*@
 
                 @foreach (var chat in Model.chatMessagess)
                 {
 
-            <div class="container bg-white rounded textsms" style="width:75%; display:none" id="@chat.FirstOrDefault().ChatName">
-                @foreach (var item in chat)
-                    {
-                        if (@item.UsName1 == User.Identity.Name ||@item.ChatName == "Всем" ||@item.ChatName == "В группу"||@item.ChatName ==User.Identity.Name && @item.UsName1 !=User.Identity.Name)
-                    {
-                        <p>@item.UsName1 : @item.Message для @item.ChatName</p>
-                    }
+                    <div class="container bg-white rounded textsms" style="width:75%; display:none" id="@chat.FirstOrDefault().ChatName">
+                        @foreach (var item in chat)
+                        {
+                            if (@item.UsName1 == User.Identity.Name || @item.ChatName == "Всем" || @item.ChatName == "В группу" || @item.ChatName == User.Identity.Name && @item.UsName1 != User.Identity.Name)
+                            {
+                                <p>@item.UsName1 : @item.Message для @item.ChatName</p>
+
+                            }
+                        }
+
+
+                    </div>
 
                 }
 
             </div>
-
-                    }
-   
-            </div>
-            </div>
+        </div>
 
         <div class="content contact" id="menu-5">
             <div class="container">
                 <div class="row">
                     <div class="flex-column a">
-                        @foreach (var fr in Model.friends)
+                        @foreach (var us in Model.sortusers)
                         {
+                            if (us.Status != 1) { 
+                            <div class="container size">
 
-                            @if (fr.Username2 == User.Identity.Name && fr.Status == 0)
-                            {
-                                <div class="container size">
-                                    <h2 style="text-align:center"><span class="btn btn-warning count">Запросы в друзья</span></h2>
-                                    <div class="col-md-3 col-sm-4">
-                                        <div class="hexagon hexagonteam gallery-item">
-                                            <div class="hexagon-in1">
-                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                                    <div class="clear"></div>
-                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
-                                                </div>
+                                <div class="col-md-3 col-sm-4">
+                                    <div class="hexagon hexagonteam gallery-item">
+                                        <div class="hexagon-in1">
+                                            <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
+                                                <div class="clear"></div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                        <h2></h2>
-                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username1</p>
-                                        <button type="button" onclick="MyFr('@fr.id')" class="btn btn-primary">Подписаться в ответ</button>
-                                    </div>
-                                </div>
-                            }
-
-
-                            <label id="y"></label>
-                            @if (fr.Username1 == User.Identity.Name && fr.Status == 1)
-                            {
-                                <div class="container size">
-                                    <h2 style="text-align:center"><span class="label label-primary">Друзья</span></h2>
-                                    <div class="col-md-3 col-sm-4">
-                                        <div class="hexagon hexagonteam gallery-item">
-                                            <div class="hexagon-in1">
-                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                                    <div class="clear"></div>
-                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                        <h2></h2>
-                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
-                                        <button type="button" class="btn btn-success">Вы друзья</button>
-                                    </div>
-                                </div>
-                            }
-
-
-
-                            @if (fr.Username1 == User.Identity.Name && fr.Status == 0)
-                            {
-
-                                <div class="container size">
-                                    <h2 style="text-align:center"><span class="label label-primary ">Мои запросы</span></h2>
-
-                                    <div class="col-md-3 col-sm-4">
-                                        <div class="hexagon hexagonteam gallery-item">
-                                            <div class="hexagon-in1">
-                                                <div class="hexagon-in2" style="background-image: url(../images/team/1.jpg);">
-
-                                                    <div class="clear"></div>
-                                                    <div class="overlay templatemo_overlaytxt">Phasellus interdum</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 col-sm-8 templatemo_servicetxt">
-                                        <h2></h2>
-                                        <p id="@fr.id" style="font-size: 1.5vw;">@fr.Username2</p>
-                                        <button type="button" class="btn btn-secondary">Вы подписчик</button>
-                                    </div>
                                 </div>
 
-                            }
+                                <div class="col-md-3 col-sm-8 templatemo_servicetxt">
+                                    <h2></h2>
+                                    <p id="@us.Username" style="font-size: 1.5vw;">@us.Username</p>
+                                    @switch (us.Status)
+                                    {
+                                        case 2:
+                                            {
+                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-info">Подписаться в ответ</button>
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-secondary">Вы подписчик</button>
+                                                break;
+                                            }
+                                        case 4:
+                                            {
+                                                <button type="button" onclick="MyFr('@us.Username')" class="btn btn-success">Вы друзья</button>
+                                                break;
+                                            }
 
+                                    }
+
+                                </div>
+                            </div>
+                            }
                         }
                     </div>
                 </div>
@@ -433,7 +325,7 @@
         function MyFr(us2) {
             var Friends = {
 
-                Id: document.getElementById('us1').innerText + document.getElementById(us2).value,
+                Id: document.getElementById('us1').innerText + document.getElementById(us2).innerText,
                 Username1: document.getElementById('us1').innerText,
                 Username2: document.getElementById(us2).innerText,
 

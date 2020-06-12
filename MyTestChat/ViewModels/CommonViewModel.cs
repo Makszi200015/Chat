@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static MyTestChat.ViewModels.UserViewModel;
 
 namespace MyTestChat.ViewModels
 {
@@ -13,14 +14,16 @@ namespace MyTestChat.ViewModels
         IFriend friend;
         IChatMessage chatMessage;
         private readonly UserManager<User> user;
-        public CommonViewModel(IFriend fr, IChatMessage chatMessages, UserManager<User> us) 
+        string SelfId { get; set; }
+        public CommonViewModel(IFriend fr, IChatMessage chatMessages, UserManager<User> us, string selfid) 
         {
             friend = fr;
             chatMessage = chatMessages;
             user = us;
+            SelfId = selfid;
             friends = new List<Friends>();
             chatMessagess = new List<List<ChatDialogs>>();
-            users = new List<List<User>>();
+            sortusers = new List<UserViewModel>();
             GetFriends();
             GetChats();
             GetUsers();
@@ -41,31 +44,41 @@ namespace MyTestChat.ViewModels
         }
         private void GetUsers()
         {
-
-            var list = user.Users.ToList();
-            if (friends.Count() != 0) 
+            var users = user.Users.ToList();
+            var currentusers = user.FindByIdAsync(SelfId);
+            currentusers.Wait();
+            foreach(var item in users) 
             {
-                foreach (var fr in friends)
+                var tempuser = new UserViewModel { Id = item.Id, Username = item.UserName};
+                if (item.Id != currentusers.Result.Id) 
                 {
-                    var nlist = list.Where(t => t.UserName != fr.Username1 && t.UserName != fr.Username2).Select(x => x.UserName).Distinct();
-
-                    foreach (var us in nlist)
+                    if(friends.Count() != 0) 
                     {
-                        users.Add(list.Where(h => h.UserName == us).ToList());
+                        if(friends.FirstOrDefault(x => x.Username1 == item.UserName && x.Username2 == currentusers.Result.UserName && x.Status == 0) != null) 
+                        {
+                            tempuser.Status = (int)UserStatus.Subscriber;
+                        }
+                        else if (friends.FirstOrDefault(x => x.Username2 == item.UserName && x.Username1 == currentusers.Result.UserName && x.Status == 0) != null) 
+                        {
+                            tempuser.Status = (int)UserStatus.ToSubscribe;
+                        }
+                        else if (friends.FirstOrDefault(x => x.Username1 == item.UserName && x.Username2 == currentusers.Result.UserName && x.Status == 1) != null && friends.FirstOrDefault(x => x.Username2 == item.UserName && x.Username1 == currentusers.Result.UserName && x.Status == 1) != null) 
+                        {
+                            tempuser.Status = (int)UserStatus.Friend;
+                        }
+                        else 
+                        {
+                            tempuser.Status = (int)UserStatus.Free;
+                        }
+                        sortusers.Add(tempuser);
                     }
                 }
             }
-            else
-                foreach (var us in list)
-                {
-                    users.Add(list.Where(h => h.UserName == us.UserName).ToList());
-                }
-
-            users = users.Distinct().ToList();
+           
             
         }
         public IEnumerable<Friends> friends;
         public List<List<ChatDialogs>> chatMessagess;
-        public List<List<User>> users;
+        public List<UserViewModel> sortusers;
     }
 }
